@@ -1,0 +1,45 @@
+// Bug #1
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class Class_Test {
+// passed
+    @Test
+    public void testEffectiveTeachingLoadWithNonZeroInstructors() {
+        Class_ classObj = new Class_();
+        // Assign two instructors with a total teaching load of 6 hours
+        TeachingClassRequest tcr1 = new TeachingClassRequest();
+        TeachingRequest tr1 = new TeachingRequest();
+        tr1.setNbrInstructors(1);
+        tr1.setTeachingLoad(3);
+        tcr1.setTeachingRequest(tr1);
+        tcr1.setAssignInstructor(true);
+        TeachingClassRequest tcr2 = new TeachingClassRequest();
+        TeachingRequest tr2 = new TeachingRequest();
+        tr2.setNbrInstructors(1);
+        tr2.setTeachingLoad(3);
+        tcr2.setTeachingRequest(tr2);
+        tcr2.setAssignInstructor(true);
+        classObj.addToteachingRequests(tcr1);
+        classObj.addToteachingRequests(tcr2);
+        // Expected effective teaching load is 3 hours per instructor
+        float expectedLoad = 3.0f;
+        float actualLoad = classObj.effectiveTeachingLoad();
+        assertEquals(expectedLoad, actualLoad, 0.0);
+    }
+    
+//failed
+
+    @Test
+    public void testEffectiveTeachingLoadWithZeroInstructors() {
+        Class_ classObj = new Class_();
+        float expectedLoad = 0.0;
+        float actualLoad = classObj.effectiveTeachingLoad();
+        assertEquals(expectedLoad, actualLoad, 0.0);
+    }
+}
+
+
+
+
